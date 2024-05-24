@@ -32,3 +32,6 @@ bin/
 *.iml
 *.xml
 .idea/
+BulkRandomNumberGenerator.iml
+.idea/*
+.idea/*.xml
