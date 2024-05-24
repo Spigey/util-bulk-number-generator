@@ -18,11 +18,14 @@ public class index {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             if (choice == 1) {
-                System.out.print("Enter the number of random numbers to generate: ");
+                System.out.print("Enter the amount of random numbers to generate: ");
                 int numNumbers = scanner.nextInt();
                 scanner.nextLine();
                 System.out.print("Select a file to write to (including file extension): ");
                 String filePath = scanner.nextLine();
+                System.out.print("Enter the range of numbers to generate (e.g., 100 for numbers between 0 and 100): ");
+                int range = scanner.nextInt();
+                scanner.nextLine();
                 System.out.print("Enable Super Fast Mode? (y/n): ");
                 boolean superFastMode = scanner.nextLine().equalsIgnoreCase("y");
                 System.out.print("\033[H\033[2J");
@@ -32,7 +35,6 @@ public class index {
                     StringBuilder all = new StringBuilder();
                     if(superFastMode){
                         startTime = System.currentTimeMillis();
-                        all.ensureCapacity(numNumbers * 4);
                         for (int i = 0; i < numNumbers; i++) {
                             all.append((int) (Math.random() * 100)).append('\n');
                         }
@@ -48,7 +50,7 @@ public class index {
                             // ▓▓▓▓▓▓▓▓▓▓ 100%
                         }*/
                             final int barLength = 30;
-                            all.append((int) (Math.random() * 100)).append("\n");
+                            all.append((int) (Math.random() * range)).append("\n");
                             if ((i + 1) % Math.max(numNumbers / barLength, 1) == 0 || i == numNumbers - 1) {
                                 // Thread.sleep(10);
                                 double percent = (double) (i + 1) / numNumbers * 100;
