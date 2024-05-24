@@ -2,3 +2,11 @@
 /shelf/
 /workspace.xml
 *.xml
+*
+.idea/*
+.idea
+.idea\*
+.idea/*.xml
+.idea\*.xml
+idea/*.xml
+/.idea/*.xml
