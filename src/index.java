@@ -28,18 +28,33 @@ public class index {
                 scanner.nextLine();
                 System.out.print("Enable Super Fast Mode? (y/n): ");
                 boolean superFastMode = scanner.nextLine().equalsIgnoreCase("y");
+                if(superFastMode)
+                    System.out.print("Enable output? (y/n): ");
+                    boolean output = scanner.nextLine().equalsIgnoreCase("y");
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 System.out.println("Generating " + numNumbers + " random numbers...");
                 try (FileWriter writer = new FileWriter(filePath)) {
                     StringBuilder all = new StringBuilder();
                     if(superFastMode){
-                        startTime = System.currentTimeMillis();
-                        for (int i = 0; i < numNumbers; i++) {
-                            all.append((int) (Math.random() * 100)).append('\n');
+                        if(output){
+                            startTime = System.currentTimeMillis();
+                            for (int i = 0; i < numNumbers; i++) {
+                                all.append((int) (Math.random() * 100)).append('\n');
+                                if (i % (int) (numNumbers * 0.0001) == 0 || i == numNumbers - 1) {
+                                    System.out.printf("Progress: %.2f%%\r", (double) i / (numNumbers - 1) * 100);
+                                }
+                            }
+                            writer.write(all.toString());
+                            endTime = System.currentTimeMillis();
+                        } else {
+                            startTime = System.currentTimeMillis();
+                            for (int i = 0; i < numNumbers; i++) {
+                                all.append((int) (Math.random() * 100)).append('\n');
+                            }
+                            writer.write(all.toString());
+                            endTime = System.currentTimeMillis();
                         }
-                        writer.write(all.toString());
-                        endTime = System.currentTimeMillis();
                     }else {
                         startTime = System.currentTimeMillis();
                         for (int i = 0; i < numNumbers; i++) {
