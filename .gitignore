@@ -35,3 +35,5 @@ bin/
 BulkRandomNumberGenerator.iml
 .idea/*
 .idea/*.xml
+!src/
+!src/*
