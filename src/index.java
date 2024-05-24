@@ -26,31 +26,38 @@ public class index {
                 System.out.print("Enter the range of numbers to generate (e.g., 100 for numbers between 0 and 100): ");
                 int range = scanner.nextInt();
                 scanner.nextLine();
-                System.out.print("Enable Super Fast Mode? (y/n): ");
-                boolean superFastMode = scanner.nextLine().equalsIgnoreCase("y");
-                if(superFastMode)
-                    System.out.print("Enable output? (y/n): ");
-                    boolean output = scanner.nextLine().equalsIgnoreCase("y");
+                System.out.print("Output Type (legacy/bar/none/perc): ");
+                String outputType = scanner.nextLine();
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 System.out.println("Generating " + numNumbers + " random numbers...");
                 try (FileWriter writer = new FileWriter(filePath)) {
                     StringBuilder all = new StringBuilder();
-                    if(superFastMode){
-                        if(output){
+                    if(!outputType.equalsIgnoreCase("bar")){
+                        if(outputType.equalsIgnoreCase("perc")){
                             startTime = System.currentTimeMillis();
                             for (int i = 0; i < numNumbers; i++) {
-                                all.append((int) (Math.random() * 100)).append('\n');
+                                all.append((int) (Math.random() * range)).append('\n');
                                 if (i % (int) (numNumbers * 0.0001) == 0 || i == numNumbers - 1) {
                                     System.out.printf("Progress: %.2f%%\r", (double) i / (numNumbers - 1) * 100);
                                 }
                             }
                             writer.write(all.toString());
                             endTime = System.currentTimeMillis();
-                        } else {
+                        } else if(outputType.equalsIgnoreCase("none")){
                             startTime = System.currentTimeMillis();
                             for (int i = 0; i < numNumbers; i++) {
-                                all.append((int) (Math.random() * 100)).append('\n');
+                                all.append((int) (Math.random() * range)).append('\n');
+                            }
+                            writer.write(all.toString());
+                            endTime = System.currentTimeMillis();
+                        } else if(outputType.equalsIgnoreCase("legacy")){
+                            startTime = System.currentTimeMillis();
+                            for (int i = 0; i < numNumbers; i++) {
+                                all.append((int) (Math.random() * range)).append('\n');
+                                if ((i + 1) % 100 == 0) {
+                                    System.out.println("Generated " + (i + 1) + " out of " + numNumbers + " random numbers.");
+                                }
                             }
                             writer.write(all.toString());
                             endTime = System.currentTimeMillis();
