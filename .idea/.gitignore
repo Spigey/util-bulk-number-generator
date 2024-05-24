@@ -10,3 +10,7 @@
 .idea\*.xml
 idea/*.xml
 /.idea/*.xml
+
+misc.xml
+modules.xml
+vcs.xml
