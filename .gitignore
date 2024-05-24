@@ -37,3 +37,6 @@ BulkRandomNumberGenerator.iml
 .idea/*.xml
 !src/
 !src/*
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
